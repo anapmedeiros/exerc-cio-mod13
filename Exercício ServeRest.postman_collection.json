@@ -1,0 +1,173 @@
+{
+	"info": {
+		"_postman_id": "2c8209d0-5e89-440d-92d0-d0efb5451392",
+		"name": "Exercício ServeRest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cadastrar Usuário",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Email já utilizado\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Este email já está sendo usado\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Ana Paula Medeiros\",\r\n  \"email\": \"anapemedeiros@qa.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}usuarios",
+					"host": [
+						"{{local}}usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Usuários Cadastrados",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}usuarios",
+					"host": [
+						"{{local}}usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Usuários por Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Achar Usuario Cadastrado\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"RVJ4az6Ft9I18fcF\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}usuarios/RVJ4az6Ft9I18fcF",
+					"host": [
+						"{{local}}usuarios"
+					],
+					"path": [
+						"RVJ4az6Ft9I18fcF"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar Usuário",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"REgistro Excluído\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"RVJ4az6Ft9I18fcF\");\r",
+							"});\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{local}}usuarios/Y1A18bcwkBGdu8W3",
+					"host": [
+						"{{local}}usuarios"
+					],
+					"path": [
+						"Y1A18bcwkBGdu8W3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Alteração\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Odt5qa4uVYSJSWj3\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "     {\r\n            \"nome\": \"Ana Carla Medeiros\",\r\n            \"email\": \"anacarlamedeiros@qa.com.br\",\r\n            \"password\": \"teste\",\r\n            \"administrador\": \"false\",\r\n            \"_id\": \"Odt5qa4uVYSJSWj3\"\r\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}usuarios/0uxuPY0cbmQhpEz1",
+					"host": [
+						"{{local}}usuarios"
+					],
+					"path": [
+						"0uxuPY0cbmQhpEz1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
